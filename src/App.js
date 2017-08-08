@@ -9,15 +9,27 @@ class App extends React.Component {
     state={
           books:[]
           }
+
     componentDidMount(){
 
         BooksAPI.getAll().then((books)=>{console.log(books);this.setState({books})})
     }
+    shiftBook = (book, event) => {
+        BooksAPI.update(book, event.target.value).then((book) => {
+            BooksAPI.getAll().then((books) => {
+                this.setState({ books })
+            })
+        })
+    }
+
     render() {
         return (
             <div className="app">
-                <Route exact path="/" render={()=>(<BooksList books={this.state.books} />)}/>
-                <Route path="/search" render={()=>(<SearchBooks />)}/>
+                <Route exact path="/" render={()=>(<BooksList
+                    books={this.state.books}
+                    onshiftBook={this.shiftBook}/>)}/>
+                <Route path="/search" render={()=>(<SearchBooks books={this.state.books}
+                                                                onshiftBook={this.shiftBook}/>)}/>
 
             </div>
         )

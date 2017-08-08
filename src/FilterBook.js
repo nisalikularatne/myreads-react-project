@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
+import * as BooksAPI from './BooksAPI'
 class FilterBook extends Component{
     state={};
     render(){
-        const {filteredBooks} =this.props;
+        const {filteredBooks,shiftBook} =this.props;
+
         return(
         <div className="list-books">
-
-                <div className="Currently Reading">
+            <div className="Currently Reading">
                     <ol className="books-grid">
-
                     {filteredBooks.map((filteredBook)=>
                         <li>
                                     <div className="bookshelf-books">
@@ -16,7 +16,13 @@ class FilterBook extends Component{
                                                     <div className="book-top">
                                                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${filteredBook.imageLinks.thumbnail})` }}></div>
                                                         <div className="book-shelf-changer">
-                                                            <select>
+                                                            <select
+                                                                name="shelf"
+                                                                onChange={ function handleonChange(e) {
+                                                                    shiftBook(filteredBook,e)
+                                                                }}
+                                                                value= {filteredBook.shelf}
+                                                            >
                                                                 <option value="none" disabled>Move to...</option>
                                                                 <option value="currentlyReading">Currently Reading</option>
                                                                 <option value="wantToRead">Want to Read</option>

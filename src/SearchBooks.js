@@ -1,9 +1,26 @@
 import React, { Component } from "react";
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 import {Link} from 'react-router-dom';
 class SearchBooks extends Component {
-    state = {};
-
+    state = {query: ''}
+    updateQuery = (query) => {
+        this.setState({ query: query.trim() })
+    }
     render() {
+        const {books} = this.props;
+        const { query } = this.state;
+        const { onshiftBook } = this.props;
+        let showingBooks
+           if (this.state.query) {
+               const match = new RegExp(escapeRegExp(this.state.query), 'i')
+               showingBooks = this.props.books.filter((book) => match.test(book.title))
+                                 }
+           else {
+               showingBooks = books
+           }
+
+               showingBooks.sort(sortBy('title'))
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -19,11 +36,49 @@ class SearchBooks extends Component {
                               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                               you don't find a specific author or title. Every search is limited by search terms.
                          */}
-                         <input type="text" placeholder="Search by title or author" />
+                         <input type="text"
+                                placeholder="Search by title or author"
+                                value={query}
+                                onChange={(event) => this.updateQuery(event.target.value)}/>
                     </div>
                     </div>
                 <div className="search-books-results">
                     <ol className="books-grid" />
+                    <div className="book-title">
+                        <ol className="books-grid">
+                        {showingBooks.map((Book) =>(
+                            <li>
+                                <div className="bookshelf-books">
+                                    <div className="book">
+                                        <div className="book-top">
+                                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${Book.imageLinks.thumbnail})` }}></div>
+                                            <div className="book-shelf-changer">
+                                                <select
+                                                    name="shelf"
+                                                    onChange={ function handleonChange(e) {
+                                                        onshiftBook(Book,e)
+                                                    }}
+
+                                                    value= {Book.shelf}
+                                                >
+                                                    <option value="none" disabled>Move to...</option>
+                                                    <option value="currentlyReading">Currently Reading</option>
+                                                    <option value="wantToRead">Want to Read</option>
+                                                    <option value="read">Read</option>
+                                                    <option value="none">None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="book-title">{Book.title}</div>
+                                        <div className="book-authors">{Book.author}</div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        ))}
+                        </ol>
+                    </div>
                 </div>
               </div>
                 );
