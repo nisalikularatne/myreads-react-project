@@ -32,6 +32,7 @@ class FilterBook extends Component{
                                                         </div>
                                                     </div>
                                                     <div className="book-title">{filteredBook.title}</div>
+
                                                     <div className="book-authors">{filteredBook.author}</div>
                                                 </div>
                                         </div>

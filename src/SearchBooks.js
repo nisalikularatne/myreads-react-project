@@ -1,23 +1,36 @@
 import React, { Component } from "react";
 import escapeRegExp from 'escape-string-regexp'
+import * as BooksAPI from './BooksAPI'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom';
 class SearchBooks extends Component {
-    state = {query: ''}
+    state = {query: '',
+             results:[]
+           }
     updateQuery = (query) => {
         this.setState({ query: query.trim() })
+        this.search(this.state.query,10)
+
+    }
+    search=(query,maxResults)=>{
+
+        BooksAPI.search(query,maxResults).then(results=>{
+            this.setState({
+                results:results
+            })
+        })
     }
     render() {
-        const {books} = this.props;
+        const {results} = this.state;
         const { query } = this.state;
         const { onshiftBook } = this.props;
         let showingBooks
            if (this.state.query) {
                const match = new RegExp(escapeRegExp(this.state.query), 'i')
-               showingBooks = this.props.books.filter((book) => match.test(book.title))
+               showingBooks =results.filter((result) => match.test(result.title))
                                  }
            else {
-               showingBooks = books
+               showingBooks = results
            }
 
                showingBooks.sort(sortBy('title'))
@@ -39,7 +52,8 @@ class SearchBooks extends Component {
                          <input type="text"
                                 placeholder="Search by title or author"
                                 value={query}
-                                onChange={(event) => this.updateQuery(event.target.value)}/>
+                                onChange={(event) => this.updateQuery(event.target.value)}
+                         />
                     </div>
                     </div>
                 <div className="search-books-results">
