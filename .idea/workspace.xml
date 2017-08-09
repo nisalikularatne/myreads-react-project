@@ -75,8 +75,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="102" selection-start-line="3" selection-start-column="102" selection-end-line="3" selection-end-column="102" />
+            <state relative-caret-position="34">
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -288,7 +288,7 @@
       <option name="presentableId" value="Default" />
       <updated>1501745212330</updated>
       <workItem from="1501745214300" duration="40416000" />
-      <workItem from="1502098015357" duration="30291000" />
+      <workItem from="1502098015357" duration="30326000" />
     </task>
     <task id="LOCAL-00001" summary="/search functionality implemented">
       <created>1502198135997</created>
@@ -332,11 +332,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502278716729</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="README file updated 3">
+      <created>1502278767467</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1502278767467</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70707000" />
+    <option name="totallyTimeSpent" value="70742000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -402,7 +409,8 @@
     <MESSAGE value="App crashing prevented" />
     <MESSAGE value="README file updated" />
     <MESSAGE value="README file updated 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="README file updated 2" />
+    <MESSAGE value="README file updated 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="README file updated 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -549,8 +557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="102" selection-start-line="3" selection-start-column="102" selection-end-line="3" selection-end-column="102" />
+        <state relative-caret-position="34">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
           <folding />
         </state>
       </provider>

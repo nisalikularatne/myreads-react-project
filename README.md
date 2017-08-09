@@ -1,6 +1,6 @@
 Instructions to start the react project
 
-##Clone the directory, run yarn install and yarn start (or npm install and npm start)
+## Clone the directory, run yarn install and yarn start (or npm install and npm start)
 ------------------------------------------------------------------------------------------------------
 ## Backend Server
 
