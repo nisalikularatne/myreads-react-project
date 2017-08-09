@@ -9,12 +9,23 @@ class SearchBooks extends Component {
            }
     updateQuery = (query) => {
         this.setState({ query: query.trim() })
-        this.search(this.state.query,10)
+        this.search(query,10)
 
     }
     search=(query,maxResults)=>{
 
         BooksAPI.search(query,maxResults).then(results=>{
+            results.map((b)=>{
+                let existentBook = this.props.books.find((bookToSearch)=>(b.id === bookToSearch.id))
+                if (existentBook) {
+                    b.shelf = existentBook.shelf
+                }else{
+                    b.shelf = 'none'
+                }
+                return null
+            })
+            this.setState(state => ({results}))
+            console.log(results)
             this.setState({
                 results:results
             })
@@ -60,7 +71,7 @@ class SearchBooks extends Component {
                     <ol className="books-grid" />
                     <div className="book-title">
                         <ol className="books-grid">
-                        {showingBooks.map((Book) =>(
+                        {results.map((Book) =>(
                             <li>
                                 <div className="bookshelf-books">
                                     <div className="book">
@@ -73,7 +84,8 @@ class SearchBooks extends Component {
                                                         onshiftBook(Book,e)
                                                     }}
 
-                                                    value= {Book.shelf}
+
+                                                    value= {Book.shelf ||'empty'}
                                                 >
                                                     <option value="none" disabled>Move to...</option>
                                                     <option value="currentlyReading">Currently Reading</option>
