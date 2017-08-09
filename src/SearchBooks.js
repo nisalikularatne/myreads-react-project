@@ -7,29 +7,34 @@ class SearchBooks extends Component {
     state = {query: '',
              results:[]
            }
-    updateQuery = (query) => {
+    updateQuery = (query,results) => {
         this.setState({ query: query.trim() })
         this.search(query,10)
+        this.setState({ query: query.trim(),results:results })
 
     }
-    search=(query,maxResults)=>{
+    search=(query,maxResults)=> {
 
-        BooksAPI.search(query,maxResults).then(results=>{
-            results.map((b)=>{
-                let existentBook = this.props.books.find((bookToSearch)=>(b.id === bookToSearch.id))
-                if (existentBook) {
-                    b.shelf = existentBook.shelf
-                }else{
-                    b.shelf = 'none'
+        if (query != '') {
+
+
+            BooksAPI.search(query, maxResults).then(results=> {
+                if (results.error) {
+                    results = [];
                 }
-                return null
+                results.map((b)=> {
+                    let existentBook = this.props.books.find((bookToSearch)=>(b.id === bookToSearch.id))
+                    if (existentBook) {
+                        b.shelf = existentBook.shelf
+                    } else {
+                        b.shelf = 'none'
+                    }
+                    return null
+                })
+                this.setState({query: query.trim(), results: results})
+
             })
-            this.setState(state => ({results}))
-            console.log(results)
-            this.setState({
-                results:results
-            })
-        })
+        }
     }
     render() {
         const {results} = this.state;
@@ -63,7 +68,7 @@ class SearchBooks extends Component {
                          <input type="text"
                                 placeholder="Search by title or author"
                                 value={query}
-                                onChange={(event) => this.updateQuery(event.target.value)}
+                                onChange={(event) => this.updateQuery(event.target.value,results)}
                          />
                     </div>
                     </div>
