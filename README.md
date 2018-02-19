@@ -1,6 +1,8 @@
-###MyReads: A Book Tracking Application 
+### MyReads: A Book Tracking Application 
 ## Instructions to start the react project
-Clone the directory, run yarn install and yarn start (or npm install and npm start)
+- Clone the directory
+- Run yarn install (npm install)
+- yarn start (npm start)
 
 ## Backend Server
 
